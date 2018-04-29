@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Local Weather Application</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script type="text/javascript">
+
+      let api_key = "5a70dc592f508761002aa4278deff6b8"
+          // get current information for the request
+      navigator.geolocation.getCurrentPosition(planetLocale)
+      function planetLocale (response){
+        var latitude = response.coords.latitude
+        var longitude = response.coords.longitude
+        console.log(response.coords.latitude)
+        console.log(response.coords.longitude)
+
+        var output = document.getElementById("out");
+        out.innerHTML =  '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+      }
+
+      //next challenge pass in latitude and longitude in json api request.
+
+      $( document ).ready(function() {
+        console.log($.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=5a70dc592f508761002aa4278deff6b8"))
+      });
+
+
+
+
+
+    get current information for the request
+      navigator.geolocation.getCurrentPosition(planetLocale)
+      function planetLocale (response){
+        var latitude = response.coords.latitude
+        var longitude = response.coords.longitude
+        console.log(response.coords.latitude)
+        console.log(response.coords.longitude)
+
+        var output = document.getElementById("out");
+        out.innerHTML =  '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+      }
+
+  </script>
+</head>
+<body>
+  <h1>Local Weather</h1>
+  <div class="container-fluid">
+    <div class="row" style="background-color: red; padding: 20px;">
+      <div class="col-xs-12 text-center">
+        <p>
+          <div id = "out"></div>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
