@@ -14,17 +14,39 @@
     $( document ).ready(function() {
     // get current information for the request
       navigator.geolocation.getCurrentPosition(planetLocale)
+
       function planetLocale (response){
+        var tempSwap = false;
         var latitude = response.coords.latitude.toFixed(1)
         var longitude = response.coords.longitude.toFixed(1)
         console.log(response.coords.latitude)
         console.log(response.coords.longitude)
 
-        var output = document.getElementById("out");
-
         var weatherObject = $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&APPID=5a70dc592f508761002aa4278deff6b8&units=metric", function(json){
-            out.innerHTML = '<p>City: ' +json.name+', Temperature: '+Math.round(json.main.temp)+' <span id="metric"> °C</span></p>';
-            console.log(json)
+            out.innerHTML = '<p>City: ' +json.name+ ',  ' +json.sys.country+ '</p><p> Temperature: </p><p id = "temp">'+Math.round(json.main.temp)+'</p><button id = "celsuis">°C</button>';
+            $('#celsuis').click(function(){
+
+              if (tempSwap ===false) {
+                function toFahrenheit(celsius) {
+                  var fahrenheit = (celsius * 9 / 5) + 32
+                  return Math.round(fahrenheit);
+                }
+                console.log("button clicked ")
+                document.getElementById('celsuis').innerHTML = "°F";
+                document.getElementById('temp').innerHTML = toFahrenheit(Math.round(json.main.temp));
+                tempSwap = true;
+              } else {
+                function toCelsius(fahrenheit) {
+                  return (fahrenheit - 32) * 5 / 9;
+                }
+                document.getElementById('celsuis').innerHTML = "°C";
+                document.getElementById('temp').innerHTML = Math.round(json.main.temp);
+                // $(this).attr("id","fahrenheit");;
+                tempSwap= false;
+              }
+            })
+
+
           })
         }
       });
@@ -33,13 +55,13 @@
   </script>
 </head>
 <body>
-  <h1>Local Weather</h1>
+  <h1 class="text-center">Local Weather</h1>
   <div class="container-fluid">
     <div class="row" style="padding: 20px;">
       <div class="col-xs-12 text-center">
         <p>
           <div id = "out">
-             <span id="metric"> °C</span>
+            <!-- <button id = "celsuis">°C</button> -->
           </div>
         </p>
       </div>
