@@ -29,17 +29,20 @@
             out.innerHTML = '<p>City: ' +json.name+ ',  ' +json.sys.country+ '</p><p> Temperature: </p><p id = "temp">'+Math.round(json.main.temp)+'°C</p><button id = "celsuis">°C</button><p><img src = '+ iconSrc +'></p>';
             $('#celsuis').click(function(){
 
+
               if (tempSwap ===false) {
                 function toFahrenheit(celsius) {
                   var fahrenheit = (celsius * 9 / 5) + 32
                   return Math.round(fahrenheit);
                 }
+                document.getElementById('celsuis').innerHTML = '°F';
                 document.getElementById('temp').innerHTML = toFahrenheit(Math.round(json.main.temp)) + "°F";
                 tempSwap = true;
               } else {
                 function toCelsius(fahrenheit) {
                   return (fahrenheit - 32) * 5 / 9;
                 }
+                document.getElementById('celsuis').innerHTML = '°C';
                 document.getElementById('temp').innerHTML = Math.round(json.main.temp) + "°C";
                 // $(this).attr("id","fahrenheit");;
                 tempSwap= false;
@@ -61,6 +64,7 @@
       <div class="col-xs-12 text-center">
         <p>
           <div id = "out">
+
           </div>
         </p>
       </div>
